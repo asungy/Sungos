@@ -1,43 +1,25 @@
 ; Signify the video interrupt (int 0x10) to write contents of `al` in tty mode
 mov ah, 0x0e
 
-; Print 'Welcome to SungOS' to terminal
-mov al, 'W'
-int 0x10
-mov al, 'e'
-int 0x10
-mov al, 'l'
-int 0x10
-mov al, 'c'
-int 0x10
-mov al, 'o'
-int 0x10
-mov al, 'm'
-int 0x10
-mov al, 'e'
-int 0x10
-mov al, ' '
-int 0x10
-mov al, 't'
-int 0x10
-mov al, 'o'
-int 0x10
-mov al, ' '
-int 0x10
-mov al, 'S'
-int 0x10
-mov al, 'u'
-int 0x10
-mov al, 'n'
-int 0x10
-mov al, 'g'
-int 0x10
-mov al, 'O'
-int 0x10
-mov al, 'S'
-int 0x10
-mov al, 0x21 ; 0x21 == '!'
-int 0x10
+; Index counter
+mov cx, 0x0
+
+; Prints 'Welcome to SungOS' to terminal
+L1:
+  ; Print character to terminal
+  mov bx, 0x7c00
+  add bx, welcome_string
+  add bx, cx
+  inc cx
+  mov al, [bx]
+  int 0x10
+  ; Check if encounter null-terminator
+  cmp [bx], BYTE 0x0
+  jne L1
+
+
+welcome_string:
+  db 'Welcome to SungOS!',0
 
 ; Jump to current address
 jmp $
