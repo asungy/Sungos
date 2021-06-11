@@ -1,15 +1,4 @@
-mov di, welcome_string
-call print_string
-
-mov di, hello_world
-call print_string
-
-welcome_string:
-  db 'Welcome to SungOS',0x0
-
-hello_world:
-  db 'Hello world',0x0
-
+; Prints a null-terminated string whose address is stored in the di register
 print_string:
   pusha
   ; Signify the video interrupt (int 0x10) to write contents of `al` in tty mode
@@ -30,11 +19,16 @@ print_string:
   popa
   ret
 
-; Jump to current address
-jmp $
+; Prints a newline
+print_newline:
+  pusha
+  ; Print newline
+  mov ah, 0x0e
+  mov al, 0x0a
+  int 0x10
+  ; Print carriage retrun
+  mov al, 0x0d
+  int 0x10
+  popa
+  ret
 
-; Fill with 510 zeros minus the size of the previous code
-times 510-($-$$) db 0
-
-; Magic number to signify boot sector
-dw 0xaa55
