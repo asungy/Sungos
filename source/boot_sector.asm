@@ -1,14 +1,22 @@
+[org 0x7c00]
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Main
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-mov di, welcome_string
+mov dx, WELCOME_STRING
 call print_string
 
 call print_newline
 call print_newline
 
-mov di, message
+mov dx, MESSAGE
 call print_string
+
+call print_newline
+call print_newline
+
+mov dx, 0xab34
+call print_hex16
 
 ; Jump to current address (causes an infinite loop)
 jmp $
@@ -21,10 +29,10 @@ jmp $
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Data
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-welcome_string:
+WELCOME_STRING:
   db 'Welcome to SungOS',0x21,0x0
 
-message:
+MESSAGE:
   db 'This OS is barren...',0x0
 
 ; Fill with 510 zeros minus the size of the previous code
