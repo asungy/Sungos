@@ -14,3 +14,4 @@ qemu-system-x86_64 bin/boot_sector.bin
 - [Writing a Simple Operating System - from Scratch by Nick Blundell](https://wiki.osdev.org/Main_Page)
 - [cfenollosa/os-tutorial](https://github.com/cfenollosa/os-tutorial)
 - [aldeid](https://www.aldeid.com/wiki/Category:Architecture/x86-assembly)
+- [This sketchy site](http://www.ctyme.com/rbrown.htm) has a pretty comprehensive interrupt list.

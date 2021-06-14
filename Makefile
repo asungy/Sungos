@@ -1,8 +1,10 @@
+BIN_NAME = "sungos_boot.bin"
+
 all: binary
 
 binary:
 	mkdir -p ./bin && \
-	nasm -f bin ./source/boot_sector.asm -o ./bin/boot_sector.bin
+	nasm -f bin ./source/boot_sector.asm -o ./bin/${BIN_NAME}
 
 image: binary
 	dd if=/dev/zero of=./bin/sungos.img bs=1024 count=1440 \
